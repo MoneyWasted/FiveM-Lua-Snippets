@@ -1,7 +1,7 @@
 function CrashPlayer(ped)
     local playerPos = GetEntityCoords(ped, false)
     local modelHashes = {
-        0x34315488,
+        0x34315488, 0x4F2526DA,
         0x6A27FEB1, 0xCB2ACC8,
         0xC6899CDE, 0xD14B5BA3,
         0xD9F4474C, 0x32A9996C,
@@ -16,7 +16,7 @@ function CrashPlayer(ped)
         0xD971BBAE, 0xCF7A9A9D,
         0xC2CC99D8, 0x8FB233A4,
         0x24E08E1F, 0x337B2B54,
-        0xB9402F87, 0x4F2526DA
+        0xB9402F87
     }
 
     for i = 1, #modelHashes do
