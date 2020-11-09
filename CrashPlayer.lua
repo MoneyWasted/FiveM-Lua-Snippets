@@ -20,6 +20,16 @@ function CrashPlayer(ped)
     }
 
     for i = 1, #modelHashes do
+        local time = 0
+        RequestModel(modelHashes[i])
+        while not HasModelLoaded(modelHashes[i]) do
+            time = time + 100.0
+            Citizen.Wait(100.0)
+            if time > 5000 then
+                print("Could not load model!" .. modelHashes[i])
+                break
+            end
+        end
         obj = CreateObject(modelHashes[i], playerPos.x, playerPos.y, playerPos.z, true, true, true)
     end
 end
