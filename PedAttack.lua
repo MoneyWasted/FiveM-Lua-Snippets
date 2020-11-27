@@ -2,7 +2,7 @@ function PedAttack(target, weapon)
     local coords = GetEntityCoords(GetPlayerPed(target))
     
     local retval, peds = AddRelationshipGroup("madPeds")
-    SetRelationshipBetweenGroups(0, groupHash, groupHash)
+    SetRelationshipBetweenGroups(0, peds, peds)
 
     local retval, players = AddRelationshipGroup("players")
     SetRelationshipBetweenGroups(5, peds, players)
