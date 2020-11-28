@@ -1,10 +1,9 @@
 function StartTransitionTimecycle(modifier)
-  if GetTimecycleTransitionModifierIndex() = -1 and GetTimecycleModifierIndex() = -1 then
-    SetTransitionTimecycleModifier(modifier, 5.0)
-  end
+    if GetTimecycleTransitionModifierIndex() == -1 and GetTimecycleModifierIndex() == -1 then
+        SetTransitionTimecycleModifier(modifier, 5.0)
+    else
+        ClearTimecycleModifier()
+    end
 end
 
-while true do
-  StartTransitionTimecycle("int_lesters")
-  Citizen.Wait(0)
-end
+StartTransitionTimecycle("int_lesters")
