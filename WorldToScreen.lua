@@ -3,8 +3,6 @@ function WorldToScreen(worldCoords)
     if not check then
         return false
     end
-    
-    screenCoordsx = (x - 0.5) * 2.0
-    screenCoordsy = (y - 0.5) * 2.0
-    return true, screenCoordsx, screenCoordsy
+
+    return true, x, y
 end
