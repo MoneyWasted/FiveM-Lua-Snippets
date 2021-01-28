@@ -9,7 +9,7 @@ function GetClosestPlayer(radius)
         local target = GetPlayerPed(value)
         if (target ~= ply) then
             local targetCoords = GetEntityCoords(GetPlayerPed(value), 0)
-            local distance =GetDistanceBetweenCoords(targetCoords["x"], targetCoords["y"], targetCoords["z"], plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
+            local distance = GetDistanceBetweenCoords(targetCoords["x"], targetCoords["y"], targetCoords["z"], plyCoords["x"], plyCoords["y"], plyCoords["z"], true)
             if (closestDistance == -1 or closestDistance > distance) then
                 closestPlayer = value
                 closestDistance = distance
