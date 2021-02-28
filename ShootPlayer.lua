@@ -1,6 +1,7 @@
 function ShootBullet(player, weapon)
-    if IsPedInAnyVehicle(player, true) then
-        ClearPedTasksImmediately(player)
+	RequestWeaponAsset(GetHashKey(weapon)) 
+    while not HasWeaponAssetLoaded(GetHashKey(weapon)) do
+    	Wait(1)
     end
     local RootPosition = GetPedBoneCoords(player, SKEL_ROOT, 0, 0, 0)
     local HandPosition = GetPedBoneCoords(player, SKEL_R_Hand, 0, 0, 0.2)
@@ -15,7 +16,7 @@ function ShootBullet(player, weapon)
         1,
         0,
         WeaponHash,
-        PlayerPedId(),
+        GetPlayerServerId(player),
         false,
         false,
         1
