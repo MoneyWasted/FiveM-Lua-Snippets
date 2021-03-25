@@ -6,8 +6,6 @@ function GetClosestPed()
         if distanceCheck <= 1.5 and ped ~= GetPlayerPed(-1) and not IsPedAPlayer(ped)  then
             closestPed = ped
             break
-
-		elseif ped == GetPlayerPed(-1) then
         end
     end
 
