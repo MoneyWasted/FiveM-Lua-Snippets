@@ -1,5 +1,5 @@
 function ShootBullet(player, weapon)
-	RequestWeaponAsset(GetHashKey(weapon)) 
+    RequestWeaponAsset(GetHashKey(weapon)) 
     while not HasWeaponAssetLoaded(GetHashKey(weapon)) do
     	Wait(1)
     end
