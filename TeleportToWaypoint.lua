@@ -4,8 +4,6 @@ function TeleportToWaypoint()
         local blip = GetFirstBlipInfoId(8, blipIterator)
         WaypointCoords = Citizen.InvokeNative(0xFA7C7F0AADF25D09, blip, Citizen.ResultAsVector()) --Thanks To Briglair [forum.FiveM.net]
         wp = true
-    else
-	break
     end
 
     local zHeigt = 0.0
