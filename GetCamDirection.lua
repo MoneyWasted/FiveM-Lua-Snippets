@@ -1,4 +1,4 @@
-local function GetCamDirection()
+function GetCamDirection()
     local heading = GetGameplayCamRelativeHeading() + GetEntityHeading(PlayerPedId())
     local pitch = GetGameplayCamRelativePitch()
     
