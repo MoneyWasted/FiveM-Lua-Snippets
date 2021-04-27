@@ -64,18 +64,20 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        local x, y, z = table.unpack(GetPedBoneCoords(GetClosestPed(), 0x796E))
-        local heading = math.atan2(z, x)
-        
-        local greenHypotenuse = math.sqrt(x*x + y*y + z*z)
-        local greenOpposite = y
-        local greenAdjacent = math.sqrt(x*x + z*z)
+        local head  = GetPedBoneCoords(GetClosestPed(), 0x796E)
+        local cam   = GetFinalRenderedCamCoord()
 
-        local pitch = math.atan2(greenOpposite, greenAdjacent)
+        local dX = head.x - cam.x;
+        local dY = head.y - cam.y;
+        local dZ = head.z - cam.z;
+
+        local pitch = math.atan2(math.sqrt(dZ * dZ + dX * dX), dY) + math.pi
+        local yaw   = math.atan2(dZ, dX)
+        local roll  = 0.0
 
         print("Heading: " .. heading .. "   Pitch: " .. pitch)
-
-        SetGameplayCamRelativeHeading(heading)SetGameplayCamRawPitch(pitch)
+        
+        SetGameplayCamRelativeRotation(roll, pitch, yaw)
 
         Citizen.Wait(0)
     end
