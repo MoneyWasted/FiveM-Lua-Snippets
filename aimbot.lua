@@ -75,7 +75,7 @@ Citizen.CreateThread(function()
         local yaw   = math.atan2(dZ, dX)
         local roll  = 0.0
 
-        print("Heading: " .. heading .. "   Pitch: " .. pitch)
+        print("Roll: " .. roll .. "   Pitch: " .. pitch .. "   Yaw: " .. yaw)
         
         SetGameplayCamRelativeRotation(roll, pitch, yaw)
 
