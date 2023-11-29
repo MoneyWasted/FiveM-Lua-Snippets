@@ -1,8 +1,12 @@
 function WorldToScreen(worldCoords)
-    local check, x, y = GetScreenCoordFromWorldCoord(worldCoords.x, worldCoords.y, worldCoords.z)
-    if not check then
-        return false
+    -- Convert world coordinates to screen coordinates
+    local isOnScreen, screenX, screenY = GetScreenCoordFromWorldCoord(worldCoords.x, worldCoords.y, worldCoords.z)
+
+    -- Check if the position is on screen
+    if not isOnScreen then
+        return false, 0.0, 0.0
     end
 
-    return true, x, y
+    -- Return true along with the screen coordinates
+    return true, screenX, screenY
 end

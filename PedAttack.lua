@@ -1,27 +1,29 @@
-function PedAttack(target, weapon)
-    local coords = GetEntityCoords(GetPlayerPed(target))
+function PedAttack(targetPed, weapon)
+    local targetCoords = GetEntityCoords(targetPed)
+
+    local retval, madPedsGroup = AddRelationshipGroup("madPeds")
+    local retval, playerGroup = AddRelationshipGroup("players")
     
-    local retval, peds = AddRelationshipGroup("madPeds")
-    SetRelationshipBetweenGroups(0, peds, peds)
+    SetRelationshipBetweenGroups(0, madPedsGroup, madPedsGroup)
+    SetRelationshipBetweenGroups(5, madPedsGroup, playerGroup)
+    SetRelationshipBetweenGroups(5, playerGroup, madPedsGroup)
+    
+    SetPedRelationshipGroupHash(targetPed, playerGroup)
 
-    local retval, players = AddRelationshipGroup("players")
-    SetRelationshipBetweenGroups(5, peds, players)
-    SetRelationshipBetweenGroups(5, players, peds)
-    SetPedRelationshipGroupHash(GetPlayerPed(target), players)
-
-    for k in EnumeratePeds() do
-        if k ~= GetPlayerPed(target) and not IsPedAPlayer(k) then
-            GiveWeaponToPed(k, GetHashKey(weapon), 9999, 0, 1)
-            ClearPedTasks(k)
-            SetPedRelationshipGroupHash(k, peds)
-            TaskCombatPed(k, GetPlayerPed(target), 0, 16)
-            SetPedFiringPattern(k, 0xC6EE6B4C)
-            SetPedCombatAbility(k, 100)
-            SetPedCombatRange(k, 2)
-            SetPedCombatAttributes(k, 46, 1)
-            SetPedCombatAttributes(k, 5, 1)
+    for _, ped in ipairs(GetGamePool('CPed')) do
+        if ped ~= targetPed and not IsPedAPlayer(ped) then
+            GiveWeaponToPed(ped, GetHashKey(weapon), 9999, false, true)
+            ClearPedTasks(ped)
+            SetPedRelationshipGroupHash(ped, madPedsGroup)
+            TaskCombatPed(ped, targetPed, 0, 16)
+            SetPedFiringPattern(ped, 0xC6EE6B4C)
+            SetPedCombatAbility(ped, 100)
+            SetPedCombatRange(ped, 2)
+            SetPedCombatAttributes(ped, 46, true)
+            SetPedCombatAttributes(ped, 5, true)
         end
     end
 end
 
+-- Example usage
 PedAttack(GetPlayerPed(-1), "WEAPON_CARBINERIFLE")

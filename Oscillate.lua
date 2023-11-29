@@ -1,7 +1,18 @@
 function Oscillate(entity, position, angleFreq, dampRatio)
-    local pos1 = ScaleVector(SubVectors(position, GetEntityCoords(entity)), (angleFreq * angleFreq))
-    local pos2 = AddVectors(ScaleVector(GetEntityVelocity(entity), (2.0 * angleFreq * dampRatio)), vector3(0.0, 0.0, 0.1))
-    local targetPos = SubVectors(pos1, pos2)
+    -- Ensure that the entity and position are valid
+    if not entity or not position then
+        return
+    end
+
+    -- Calculate the force to be applied based on the damping harmonic oscillator model
+    local posDifference = SubVectors(position, GetEntityCoords(entity))
+    local pos1 = ScaleVector(posDifference, (angleFreq * angleFreq))
     
+    local entityVelocity = GetEntityVelocity(entity)
+    local pos2 = AddVectors(ScaleVector(entityVelocity, (2.0 * angleFreq * dampRatio)), vector3(0.0, 0.0, 0.1)) -- Adding a small constant vector
+
+    local targetPos = SubVectors(pos1, pos2)
+
+    -- Apply the calculated force to the entity
     ApplyForce(entity, targetPos)
 end

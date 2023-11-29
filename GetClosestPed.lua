@@ -1,11 +1,16 @@
-function GetClosestPed()
-    local closestPed = 0
-
-    for ped in EnumeratePeds() do
-        local distanceCheck = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), GetEntityCoords(ped), true)
-        if distanceCheck <= 1.5 and ped ~= GetPlayerPed(-1) and not IsPedAPlayer(ped)  then
-            closestPed = ped
-            break
+function GetClosestPed(minDistance)
+    local playerPed = GetPlayerPed(-1)
+    local playerCoords = GetEntityCoords(playerPed)
+    local closestPed = nil
+    
+    for _, ped in ipairs(GetGamePool('CPed')) do
+        if ped ~= playerPed and not IsPedAPlayer(ped) then
+            local pedCoords = GetEntityCoords(ped)
+            local distance = GetDistanceBetweenCoords(playerCoords, pedCoords, true)
+            if distance <= minDistance then
+                closestPed = ped
+                break
+            end
         end
     end
 
